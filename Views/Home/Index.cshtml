@@ -1,0 +1,35 @@
+﻿<button class="btn btn-primary" id="sendData">Отправить данные</button>
+
+<script>
+    let mouseCoordinates = [];
+
+    document.addEventListener("mousemove", (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+        const t = new Date().toISOString();
+        mouseCoordinates.push([x, y, t]);
+    });
+
+    document.getElementById("sendData").addEventListener("click", () => {
+        const data = {
+            coordinatesJson: JSON.stringify(mouseCoordinates)
+        };
+
+        fetch('/Home/SaveCoordinates', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Данные успешно отправлены!");
+                    mouseCoordinates = [];
+                }
+                else {
+                    alert("Ошибка при отправке данных.");
+                }
+            });
+    });
+</script>

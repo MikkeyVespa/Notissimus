@@ -1,0 +1,11 @@
+1. Создайте таблицу Coordinates в бд со структурой:
+
+	use "название вашей бд"
+	create table Coordinates (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	CoordinatesJson NVARCHAR(MAX),
+	CreatedAt DATETIME)
+
+2. В файле appsettings.json замените строку подключения на свою.
+3. В файле DbContextNotiss.cs в провайдере optionsBuilder.UseSqlServer(...) замените строку подключения на свою.
+4. Запустите проект.
